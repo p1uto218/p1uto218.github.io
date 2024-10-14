@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>설정 작성 도구</title>
+</head>
+<body>
+  <h1>설정 작성 도구</h1>
+  
+  <!-- 캐릭터 시트 -->
+  <h2>캐릭터 시트</h2>
+  <form id="characterForm">
+    <label for="name">캐릭터 이름:</label>
+    <input type="text" id="name" name="name" placeholder="이름"><br><br>
+
+    <label for="age">나이:</label>
+    <input type="number" id="age" name="age" placeholder="나이"><br><br>
+
+    <label for="personality">성격:</label>
+    <input type="text" id="personality" name="personality" placeholder="성격"><br><br>
+
+    <label for="backstory">배경 이야기:</label>
+    <textarea id="backstory" name="backstory" placeholder="배경 이야기"></textarea><br><br>
+
+    <button type="submit">캐릭터 저장</button>
+  </form>
+  
+  <div id="characterOutput"></div>
+
+  <hr>
+
+  <!-- 랜덤 캐릭터 생성기 -->
+  <h2>랜덤 캐릭터 생성기</h2>
+  <button onclick="generateRandomCharacter()">랜덤 캐릭터 생성</button>
+  <div id="randomCharacterOutput"></div>
+
+  <hr>
+
+  <!-- 키워드 조합기 -->
+  <h2>키워드 조합기</h2>
+  <button onclick="generateKeywords()">랜덤 키워드 조합</button>
+  <div id="keywordOutput"></div>
+
+  <script>
+    // 캐릭터 시트 저장 기능
+    document.getElementById('characterForm').onsubmit = function(event) {
+      event.preventDefault();
+      const character = {
+        name: document.getElementById('name').value,
+        age: document.getElementById('age').value,
+        personality: document.getElementById('personality').value,
+        backstory: document.getElementById('backstory').value
+      };
+      document.getElementById('characterOutput').innerHTML = `
+        <h3>캐릭터 시트</h3>
+        <p><strong>이름:</strong> ${character.name}</p>
+        <p><strong>나이:</strong> ${character.age}</p>
+        <p><strong>성격:</strong> ${character.personality}</p>
+        <p><strong>배경 이야기:</strong> ${character.backstory}</p>
+      `;
+    };
+
+    // 랜덤 캐릭터 생성기
+    const names = ["아린", "수현", "태민", "영우", "민지"];
+    const personalities = ["용감한", "내성적인", "외향적인", "침착한", "호기심 많은"];
+    const backstories = [
+      "어린 시절부터 모험을 동경해온 인물",
+      "불우한 과거를 극복하고 살아온 캐릭터",
+      "한때 전사였으나 지금은 평화로운 삶을 살아가고 있음",
+      "잃어버린 기억을 되찾기 위해 여정을 떠남"
+    ];
+
+    function generateRandomCharacter() {
+      const name = names[Math.floor(Math.random() * names.length)];
+      const personality = personalities[Math.floor(Math.random() * personalities.length)];
+      const backstory = backstories[Math.floor(Math.random() * backstories.length)];
+      document.getElementById('randomCharacterOutput').innerHTML = `
+        <h3>랜덤 캐릭터 시트</h3>
+        <p><strong>이름:</strong> ${name}</p>
+        <p><strong>성격:</strong> ${personality}</p>
+        <p><strong>배경 이야기:</strong> ${backstory}</p>
+      `;
+    }
+
+    // 키워드 조합기
+    const keywords1 = ["빛나는", "어두운", "고요한", "뜨거운", "차가운"];
+    const keywords2 = ["전사", "마법사", "탐험가", "왕", "도둑"];
+    const keywords3 = ["숲 속", "성", "폐허", "하늘", "바다"];
+
+    function generateKeywords() {
+      const word1 = keywords1[Math.floor(Math.random() * keywords1.length)];
+      const word2 = keywords2[Math.floor(Math.random() * keywords2.length)];
+      const word3 = keywords3[Math.floor(Math.random() * keywords3.length)];
+      document.getElementById('keywordOutput').innerHTML = `
+        <h3>랜덤 키워드 조합</h3>
+        <p>키워드: ${word1} ${word2}에서 ${word3}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
